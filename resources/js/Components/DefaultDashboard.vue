@@ -17,7 +17,7 @@
         </div>
 
         <!-- Main Title -->
-        <h1 class="text-6xl font-semibold text-teal-800 mb-2">Logger</h1>
+            <ApplicationLogo />
 
         <!-- Description -->
         <p class="text-lg w-1/2 mb-4">
@@ -37,7 +37,10 @@
 </template>
 
 <script>
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+
 export default {
-    name: 'NoteSyncWeb'
+    name: 'NoteSyncWeb',
+    components: {ApplicationLogo}
 };
 </script>

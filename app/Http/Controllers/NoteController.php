@@ -18,9 +18,34 @@ class NoteController extends Controller
     {
         $existingNote = Note::find($id);
         return inertia::render('Dashboard', [
-            'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->get(),
+            'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->where('trashed', false)->get(),
             'existingNote' => $existingNote,
         ]);
+    }
+    public function viewTrashedNote($id)
+    {
+        $existingNote = Note::find($id);
+        return inertia::render('Dashboard', [
+            'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->where('trashed', true)->get(),
+            'existingNote' => $existingNote,
+        ]);
+    }
+
+    public function fetchTrasedNotes()
+    {
+//        $existingNote = Note::find($id);
+        return inertia::render('Dashboard', [
+            'trashedNotes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->where('trashed', true)->get(),
+//            'existingNote' => $existingNote,
+        ]);
+    }
+
+    public function restorTrashedNote($id)
+    {
+        $noteToRestor = Note::where('id', $id)->get();
+        $noteToRestor[0]->trashed =  false;
+
+        $noteToRestor[0]->save();
     }
 
     /**
@@ -31,7 +56,7 @@ class NoteController extends Controller
         $notesToDelete = Note::where('content', '')->where('user_id', Auth::user()->id)->get();
         if($notesToDelete->count() === 1 ){
             return inertia::render('Dashboard', [
-                'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->get(),
+                'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->where('trashed', false)->get(),
                 'existingNote' => $notesToDelete,
             ]);
         }else if($notesToDelete->count() > 1){
@@ -40,23 +65,25 @@ class NoteController extends Controller
             }
 
             $newNote =  Note::create([
-                'title' => '',
+                'title' => 'New note',
                 'content' => '',
                 'user_id' => Auth::user()->id,
+                'trashed' => false,
             ]);
 
             return inertia::render('Dashboard', [
-                'notes' => Note::orderBy('id', 'desc')->where('user_id', $newNote->user_id)->get(),
+                'notes' => Note::orderBy('id', 'desc')->where('user_id', $newNote->user_id)->where('trashed', false)->get(),
                 'existingNote' => $newNote,
             ]);
         }else if ($notesToDelete->count() === 0){
             $newNote =  Note::create([
-                'title' => '',
+                'title' => 'New note',
                 'content' => '',
+                'trashed' => false,
                 'user_id' => Auth::user()->id,
             ]);
             return inertia::render('Dashboard', [
-                'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->get(),
+                'notes' => Note::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->where('trashed', false)->get(),
                 'existingNote' => $newNote,
             ]);
         }
@@ -69,6 +96,18 @@ class NoteController extends Controller
     {
 
     }
+
+    public function trashed($id)
+    {
+        $noteToDelete = Note::where('id', $id)->get();
+        $noteToDelete[0]->trashed =  true;
+
+        $noteToDelete[0]->save();
+    }
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -102,8 +141,7 @@ class NoteController extends Controller
      */
     public function destroy( $note)
     {
-        $noteToDelete = Note::where('id', $note)->get();
-//        dd($noteToDelete[0]);
-        $noteToDelete[0]->delete();
-    }
+
+        }
+
 }

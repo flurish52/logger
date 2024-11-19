@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-96 m-4 py-auto px-auto flex flex-col items-center justify-center text-center text-gray-800">
+    <div class="md:ml-96 m-4 py-auto px-auto flex flex-col items-center justify-center text-center text-gray-800">
 
         <div class="mx-auto flex flex-col items-center justify-center w-full">
 
@@ -16,7 +16,7 @@
             </svg>
         </div>
 
-        <!-- Main Title -->
+<!--         Main Title-->
             <ApplicationLogo />
 
         <!-- Description -->
@@ -27,20 +27,19 @@
             <p class="text-2xl max-w-md mb-4 font-bold my-6">
                 Click on any note to view
         </p>
-
-        <!-- Security Notice -->
-<!--        <p class="text-sm text-gray-500 mt-4">-->
-<!--            🔒 Your notes are securely synced and encrypted across all devices.-->
-<!--        </p>-->
         </div>
+
+        <AddNewDropDown
+        class="md:hidden"
+        />
     </div>
 </template>
 
 <script>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import AddNewDropDown from "@/Components/AddNewDropDown.vue"
 
 export default {
-    name: 'NoteSyncWeb',
-    components: {ApplicationLogo}
+    components: {ApplicationLogo, AddNewDropDown}
 };
 </script>

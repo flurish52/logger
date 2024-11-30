@@ -1,32 +1,41 @@
-<!-- src/views/HomePage.vue -->
 <template>
-    <div class="flex flex-col items-center justify-top pt-24 h-screen bg-gradient-to-r from-teal-200 to-teal-500 text-gray-800">
-        <h1 class="text-6xl font-bold mb-4">
-            <ApplicationLogo />
+    <section
+        class="relative bg-[url('https://images.pexels.com/photos/7578201/pexels-photo-7578201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-center bg-no-repeat"
+    >
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-slate-200/90"
+        ></div>
+        <div
+            class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8"
+        >
+            <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right flex items-center justify-center flex-col">
+                <h1 class="text-3xl font-extrabold sm:text-5xl">
+                    <ApplicationLogo />
+                    Capture your thoughts, <strong class="block font-extrabold text-teal-900"> anytime, anywhere. </strong>
+                </h1>
 
+                <p class="mt-4 max-w-lg sm:text-xl/relaxed">
+                    Organize your ideas and access them across all devices with ease.
+                </p>
 
-        </h1>
-        <p class="text-4xl font-light mb-8 text-center px-4 max-w-full">
-            Capture your thoughts, anytime, anywhere.
-        </p>
-        <div class="flex space-x-4">
-            <Link
-                href="/login"
-                class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 transition"
-            >
-                Login
-            </Link>
-            <Link
-                href="/register"
-                class="px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-blue-700 transition"
-            >
-                Get Started
-            </Link>
+                <div class="mt-8 flex flex-wrap gap-4 text-center items-center justify-center">
+                    <Link
+                        href="/login"
+                        class="block w-full rounded bg-teal-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-teal-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto"
+                    >
+                        Login
+                    </Link>
+
+                    <Link
+                        href="/register"
+                        class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-teal-600 shadow hover:text-teal-900 focus:outline-none focus:ring active:text-rose-500 sm:w-auto"
+                    >
+                        Get Started
+                    </Link>
+                </div>
+            </div>
         </div>
-
-    </div>
-
-
+    </section>
 </template>
 
 <script>
@@ -36,9 +45,6 @@ export default {
 </script>
 
 <script setup>
-import {Link} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import addItemForm from "@/Components/addItemForm.vue";
-import App from "@/Components/app.vue";
-
 </script>

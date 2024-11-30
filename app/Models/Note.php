@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\SharedNotes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,5 +16,13 @@ class Note extends Model
         'trashed',
         'content',
         'user_id',
+        'shared',
     ];
+
+
+    public function sharedNotes()
+    {
+        return $this->hasMany(SharedNotes::class);
+    }
+
 }

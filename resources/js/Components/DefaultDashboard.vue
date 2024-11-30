@@ -1,7 +1,9 @@
 <template>
     <div class="md:ml-96 m-4 py-auto px-auto flex flex-col items-center justify-center text-center text-gray-800">
+        <h1 class="absolute top-0 bg-inherit w-full font-extrabold text-teal-900 z-0 text-center text-xl">Welcome, {{$page.props.auth.user.username.toUpperCase()}}</h1>
 
-        <div class="mx-auto flex flex-col items-center justify-center w-full">
+
+        <div class="mx-auto flex flex-col items-center justify-center w-full my-8">
 
         <!-- Icons Section -->
         <div class="flex items-center justify-center gap-6 mb-6 mx-auto">
@@ -30,7 +32,7 @@
         </div>
 
         <AddNewDropDown
-        class="md:hidden"
+        class="lg:hidden"
         />
     </div>
 </template>

@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('shared_notes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('note_id');
+            $table->boolean('read')->default(false);
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->boolean('trashed');
-            $table->boolean('shared')->default(false);
+            $table->foreign('note_id')
+                ->references('id')
+                ->on('notes')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('shared_notes');
     }
 };

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('shared_notes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('note_id');
+            $table->unsignedBigInteger('user_id');  // Define user_id column
+            $table->unsignedBigInteger('note_id');  // Define note_id column
             $table->boolean('read')->default(false);
             $table->foreign('user_id')
                 ->references('id')

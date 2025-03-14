@@ -15,17 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
+            $table->unsignedBigInteger('user_id');  // Add the user_id column
+            $table->foreign('user_id')  // Add the foreign key constraint
+            ->references('id')
                 ->on('users')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->boolean('trashed');
             $table->boolean('shared')->default(false);
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
